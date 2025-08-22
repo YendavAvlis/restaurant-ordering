@@ -17,6 +17,7 @@ function getItems(arr){
 
                 <button><img src="./images/add-btn.svg" alt=""></button>
             </div>
+            <hr />
         `
     })
 }
