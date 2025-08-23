@@ -1,10 +1,36 @@
 import { menuArray } from "./data.js";
 
-const itemList = document.querySelector('#item-list')
+const itemsOrdered = []
 
-function getItems(arr){
-    arr.map((item) => {
-        return itemList.innerHTML += `
+document.addEventListener('click', (e) => {
+    if(e.target.dataset.add){
+        handleClickAdd(e.target.dataset.add)
+    }
+
+})
+
+function handleClickAdd(itemId){
+    const targetItemId = menuArray.filter((item) => {
+            return String(item.id) === itemId
+    })[0]
+
+    itemsOrdered.push(targetItemId.price)
+    getTotalPrice(itemsOrdered)
+}
+
+function getTotalPrice(orders){
+    let total = orders.reduce((total, currentItem) => {
+        return total + currentItem
+    })
+
+    console.log(total)
+
+}
+
+function getItems(){
+    let menuItems = ``
+    menuArray.forEach((item) => {
+        menuItems += `
             <div class="item">
                 <div>
                     <span class="emoji">${item.emoji}</span>
@@ -15,15 +41,17 @@ function getItems(arr){
                     </div>
                 </div>
 
-                <button><img src="./images/add-btn.svg" alt=""></button>
+                <img src="./images/add-btn.svg" alt="" data-add="${item.id}">
             </div>
             <hr />
         `
     })
+
+    return menuItems
 }
 
 function render(){
-    getItems(menuArray)
+    document.querySelector('#item-list').innerHTML = getItems(menuArray)
 }
 
 render()
