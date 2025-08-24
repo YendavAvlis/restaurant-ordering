@@ -30,6 +30,7 @@ header {
 main{
     width: 100%;
     max-width: 430px;
+    padding: 0 1em;
 }
 
 .item {
@@ -84,4 +85,59 @@ hr{
     margin: 0 auto;
     width: 60%;
 
+}
+
+#order{
+    display: flex;
+    flex-direction: column;
+    font-family: Smythe;
+    font-size: 1.25rem;
+}
+
+#order > h2 {
+    text-align: center;
+    font-weight: 400;
+    margin: 1em 0;
+}
+
+#ordered-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.selected-item{
+    display: flex;
+    justify-content: space-between;
+    padding: .5em 0;
+}
+
+.selected-item button{
+    border: none;
+    background: none;
+    margin-left: .5em;
+    color: #BBBBBB;
+    cursor: pointer;
+    color: red;
+    opacity: 60%;
+}
+
+#order > hr{
+    width: 98%;
+    margin: 1em auto;
+}
+
+#order > button{
+    margin-top: 2em;
+    background-color: #16DB99;
+    border: none;
+    padding: 1em 0;
+    color: #ffffff;
+    font-size: .9rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#total-price{
+    display: flex;
+    justify-content: space-between;
 }

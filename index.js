@@ -1,34 +1,63 @@
 import { menuArray } from "./data.js";
 
-const itemsOrdered = []
+const totalItemsOrdered = []
+let selectedItems = []
+const order = document.querySelector('#order')
 
 document.addEventListener('click', (e) => {
     if(e.target.dataset.add){
         handleClickAdd(e.target.dataset.add)
     }
+    if(e.target.dataset.remove){
+        handleClickRemove(e.target.dataset.remove)
+    }
 
 })
 
 function handleClickAdd(itemId){
+
     const targetItemId = menuArray.filter((item) => {
             return String(item.id) === itemId
     })[0]
 
-    itemsOrdered.push(targetItemId.price)
-    getTotalPrice(itemsOrdered)
-}
-
-function getTotalPrice(orders){
-    let total = orders.reduce((total, currentItem) => {
-        return total + currentItem
+    totalItemsOrdered.push(targetItemId.price)
+    selectedItems.push({
+        id: targetItemId.id,
+        name: targetItemId.name,
+        price: targetItemId.price
     })
 
-    console.log(total)
+    console.log()
+    render()
+}
 
+
+function handleClickRemove(itemId){
+    console.log(itemId)
+    selectedItems.forEach(id => {
+        selectedItems.indexOf(id, 1)
+
+    })
+    render()
+}
+
+
+function getTotalPrice(orders){
+    let total = 0
+    if(orders.length > 0){
+            total = orders.reduce((total, currentItem) => {
+            return total + currentItem
+        })
+    } else {
+        return 0
+    }
+    return total
 }
 
 function getItems(){
     let menuItems = ``
+    let order = ``
+    let items = ``
     menuArray.forEach((item) => {
         menuItems += `
             <div class="item">
@@ -47,11 +76,42 @@ function getItems(){
         `
     })
 
-    return menuItems
+    selectedItems.forEach(item => {
+        items += `
+                <div class="selected-item">
+                    <div>
+                        <span>${item.name}</span>
+                        <button data-remove="${item.id}">remove</button>
+                    </div>
+                    <span>$${item.price}</span>
+                </div>`
+    })
+
+    order = `<div id="order">
+                <h2>Your order</h2>
+                <div id="ordered-items">
+                    ${
+                        items
+                    }
+                </div>
+                <hr/>
+                <div id="total-price">
+                    <span>Total price:</span>
+                    <span>$${getTotalPrice(totalItemsOrdered)}</span>
+                </div>
+                <button id="complete-order">Complete order</button>
+            </div>`
+
+    return menuItems + order
 }
 
 function render(){
-    document.querySelector('#item-list').innerHTML = getItems(menuArray)
+    document.querySelector('#container').innerHTML = getItems()
+
+
+
 }
+
+
 
 render()
