@@ -33,11 +33,13 @@ function handleClickAdd(itemId){
 
 
 function handleClickRemove(itemId){
-    console.log(itemId)
-    selectedItems.forEach(id => {
-        selectedItems.indexOf(id, 1)
-
+    let numItemId = parseInt(itemId)
+    let removedItems = selectedItems.filter(item =>{
+            console.log('inside filter', typeof item.id)
+        return item.id !== numItemId
     })
+    console.log('removed item', removedItems)
+
     render()
 }
 
@@ -107,6 +109,7 @@ function getItems(){
 
 function render(){
     document.querySelector('#container').innerHTML = getItems()
+    console.log('From render', selectedItems)
 
 
 
