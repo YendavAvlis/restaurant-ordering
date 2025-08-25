@@ -10,16 +10,15 @@ html, body{
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+    width: 100%;
+
     font-family: Inter;
 }
 
 header {
     width: 100%;
     max-width: 430px;
+    margin: 0 auto;
     background: url(./images/header.png) no-repeat center ;
     padding: 1em;
     font-family: Smythe;
@@ -30,6 +29,7 @@ header {
 main{
     width: 100%;
     max-width: 430px;
+    margin: 0 auto;
     padding: 0 1em;
 }
 
@@ -140,4 +140,9 @@ hr{
 #total-price{
     display: flex;
     justify-content: space-between;
+}
+
+.selected-item >div >span{
+
+    margin: 0 .5em;
 }

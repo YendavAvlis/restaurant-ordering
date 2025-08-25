@@ -24,7 +24,8 @@ function handleClickAdd(itemId){
     selectedItems.push({
         id: targetItemId.id,
         name: targetItemId.name,
-        price: targetItemId.price
+        price: targetItemId.price,
+        quantity: 0
     })
 
     console.log()
@@ -32,13 +33,14 @@ function handleClickAdd(itemId){
 }
 
 
-function handleClickRemove(itemId){
-    let numItemId = parseInt(itemId)
-    let removedItems = selectedItems.filter(item =>{
-            console.log('inside filter', typeof item.id)
-        return item.id !== numItemId
-    })
-    console.log('removed item', removedItems)
+function handleClickRemove(itemName){
+    // let numItemId = parseInt(itemId)
+    console.log('before',selectedItems)
+    selectedItems = selectedItems.filter(item => item.name !== itemName)
+    // selectedItems.splice(
+    //     selectedItems.findIndex(item => item.id === numItemId), 1
+    // )
+    console.log('after',selectedItems)
 
     render()
 }
@@ -56,6 +58,7 @@ function getTotalPrice(orders){
     return total
 }
 
+let itemCount = 0
 function getItems(){
     let menuItems = ``
     let order = ``
@@ -79,14 +82,25 @@ function getItems(){
     })
 
     selectedItems.forEach(item => {
-        items += `
+
+        if (!items.includes(item.name)){
+
+            items += `
                 <div class="selected-item">
                     <div>
                         <span>${item.name}</span>
-                        <button data-remove="${item.id}">remove</button>
+                        <button data-remove="${item.name}">remove</button>
                     </div>
-                    <span>$${item.price}</span>
+                    <div>
+                        <span>x${item.quantity += 1}</span>
+                        <span>$${item.price}</span>
+                    </div>
                 </div>`
+
+        }
+
+
+                console.log(typeof item.name)
     })
 
     order = `<div id="order">
