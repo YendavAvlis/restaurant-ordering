@@ -11,7 +11,7 @@ html, body{
 
 body {
     width: 100%;
-
+    min-height: 100vh;
     font-family: Inter;
 }
 
@@ -29,6 +29,7 @@ header {
 main{
     width: 100%;
     max-width: 430px;
+    min-height: 100vh;
     margin: 0 auto;
     padding: 0 1em;
 }
